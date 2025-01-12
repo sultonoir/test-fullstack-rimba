@@ -1,3 +1,7 @@
+# API Documentation
+
+This document describes the REST API for managing users in the system. The API supports CRUD operations (Create, Read, Update, Delete) for user resources.
+
 # Setup Guide for Docker, Prisma, and Jest Tests
 
 This guide provides instructions to set up your environment using Docker, Prisma ORM, and running Jest tests for your API.

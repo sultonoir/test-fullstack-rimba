@@ -46,5 +46,5 @@ const swaggerSpec = swaggerJsdoc(options);
 
 export const setupSwagger = (app: Express): void => {
   // Setup route untuk mengakses Swagger UI
-  app.use(swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };

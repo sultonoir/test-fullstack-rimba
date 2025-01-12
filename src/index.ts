@@ -21,6 +21,11 @@ app.use(logRequest);
 // Menggunakan routes untuk user
 app.use(userRoutes);
 
+// Redirect root URL to /api-docs/
+app.get("/", (req: Request, res: Response) => {
+  res.redirect("/api-docs/");
+});
+
 // Error handling middleware
 app.use(logError);
 

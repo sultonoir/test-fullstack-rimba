@@ -47,7 +47,7 @@ export const createUser = async (
     });
     res.status(201).json(newUser);
   } catch (error) {
-    res.status(400).json({ error: "Data tidak valid" });
+    res.status(400).json({ error: "Email sudah digunakan" });
   }
 };
 

@@ -55,6 +55,8 @@ router.get("/users/:id", getUserById);
  *     responses:
  *       201:
  *         description: Pengguna berhasil ditambahkan
+ *       400:
+ *         description: Email sudah digunakan
  */
 router.post("/users", validateUserInput, createUser);
 

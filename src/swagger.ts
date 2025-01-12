@@ -16,10 +16,6 @@ const options = {
         User: {
           type: "object",
           properties: {
-            id: {
-              type: "string",
-              description: "ID pengguna (UUID)",
-            },
             name: {
               type: "string",
               description: "Nama pengguna",

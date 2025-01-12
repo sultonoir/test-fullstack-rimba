@@ -6,21 +6,19 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5001:5001"
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/user_api
-    volumes:
-      - .:/app
+    env_file:
+      - .env
     depends_on:
       - db
-    command: sh -c "npm install && npx prisma db push && npm run dev"
+    command: sh -c "npx prisma generate && npm run dev"
     develop:
       watch:
         - path: ./package.json
           action: rebuild
-        - path: ./package.lock.json
+        - path: ./package-lock.json
           action: rebuild
-        - path: ./
-          target: ./src
+        - path: ./src
+          target: /app/src # Sinkronkan folder src dengan container
           action: sync
 
   db:
@@ -28,10 +26,8 @@ services:
     restart: always
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: user_api
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

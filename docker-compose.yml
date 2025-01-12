@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/user_api
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    command: sh -c "npm install && npx prisma db push && npm run dev"
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./package.lock.json
+          action: rebuild
+        - path: ./
+          target: ./src
+          action: sync
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: user_api
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
